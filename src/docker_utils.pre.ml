@@ -32,7 +32,7 @@ module Buffer = struct
   let add_pct_encoded buf s =
     add_pct_encoded_scan buf s 0 0 (String.length s)
 
-  (* Url query encode.  (Avoid to depend on external librarues for
+  (* Url query encode.  (Avoid to depend on external libraries for
      this and insert it directly into the buffer instead of going
      through a string.)  Inspired by [Uri]. *)
   let add_encoded_query buf = function

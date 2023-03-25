@@ -43,14 +43,14 @@ let read_headers fn_name buf fd =
       (* Split on \r\n *)
       let i = index_CRLF b ~pos:0 ~len:r in
       if i < 0 then
-        Buffer.add_subbytes buf b 0 r
+        Buffer.add_subbytes buf (Bytes.to_string b) 0 r
       else if i = 0 && Buffer.length buf = 0 then (
         (* End of headers (all previously captured). *)
-        Buffer.add_subbytes buf b 0 r;
+        Buffer.add_subbytes buf (Bytes.to_string b) 0 r;
         continue := false
       )
       else (
-        Buffer.add_subbytes buf b 0 i;
+        Buffer.add_subbytes buf (Bytes.to_string b) 0 i;
         headers := Buffer.contents buf :: !headers;
         Buffer.clear buf;
         (* Capture all possible additional headers in [b]. *)
@@ -62,9 +62,9 @@ let read_headers fn_name buf fd =
           pos := !i + 2;
           len := !len - h_len - 2;
         done;
-        if !i < 0 then Buffer.add_subbytes buf b !pos !len
+        if !i < 0 then Buffer.add_subbytes buf (Bytes.to_string b) !pos !len
         else ( (* !i = !pos, i.e., empty line *)
-          Buffer.add_subbytes buf b (!pos + 2) (!len - 2);
+          Buffer.add_subbytes buf (Bytes.to_string b) (!pos + 2) (!len - 2);
           continue := false;
         )
       )
@@ -92,7 +92,7 @@ let read_all buf fd =
   let continue = ref true in
   while !continue do
     let r = Unix.read fd b 0 4096 in
-    if r > 0 then Buffer.add_subbytes buf b 0 r
+    if r > 0 then Buffer.add_subbytes buf (Bytes.to_string b) 0 r
     else continue := false
   done;
   Buffer.contents buf
@@ -123,7 +123,7 @@ let deal_with_status_500 fn_name status fd =
 
 let[@inline] send_buffer fn_name addr buf =
   let fd = connect fn_name addr in
-  ignore(Unix.write fd (Buffer.to_bytes buf) 0 (Buffer.length buf));
+  ignore(Unix.write fd (String.to_bytes (Buffer.to_bytes buf)) 0 (Buffer.length buf));
   fd
 
 let get fn_name addr url query =
@@ -189,7 +189,7 @@ let delete fn_name addr url query =
   Buffer.add_encoded_query buf query;
   Buffer.add_string buf Docker_config.http11_header;
   Buffer.add_string buf "\r\n";
-  ignore(Unix.write fd (Buffer.to_bytes buf) 0 (Buffer.length buf));
+  ignore(Unix.write fd (String.to_bytes @@ Buffer.to_bytes buf) 0 (Buffer.length buf));
   fd
 
 let response_of_delete fn_name addr url query =
