@@ -1,0 +1,399 @@
+[
+    {
+        "Id": "f4a443540339c612dbb656459a80cda2119b9ce05a9405d7e79eadef2bafdd2c",
+        "Names": [
+            "/romantic_swanson"
+        ],
+        "Image": "alpine",
+        "ImageID": "sha256:b2aa39c304c27b96c1fef0c06bee651ac9241d49c4fe34381cab8453f9a89c7d",
+        "Command": "/bin/sh",
+        "Created": 1682949699,
+        "Ports": [],
+        "Labels": {},
+        "State": "exited",
+        "Status": "Exited (130) 6 hours ago",
+        "HostConfig": {
+            "NetworkMode": "default"
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "f2e2ddc82df222657b187e5855fd84ad41b60da854fb3b8ae11cba60445868d8",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        },
+        "Mounts": []
+    },
+    {
+        "Id": "47da418682adaa85826003735ce2ae5df8a99610e037f04d1dcd716527f815b2",
+        "Names": [
+            "/suspicious_ganguly"
+        ],
+        "Image": "alpine",
+        "ImageID": "sha256:b2aa39c304c27b96c1fef0c06bee651ac9241d49c4fe34381cab8453f9a89c7d",
+        "Command": "/bin/sh",
+        "Created": 1682943924,
+        "Ports": [],
+        "Labels": {},
+        "State": "exited",
+        "Status": "Exited (130) 7 hours ago",
+        "HostConfig": {
+            "NetworkMode": "default"
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "f2e2ddc82df222657b187e5855fd84ad41b60da854fb3b8ae11cba60445868d8",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        },
+        "Mounts": []
+    },
+    {
+        "Id": "3dcb9e1e1bc2f1eaf8344cef8715a5132f71c39d6ea16381192e94931bc7804e",
+        "Names": [
+            "/distracted_carver"
+        ],
+        "Image": "debian",
+        "ImageID": "sha256:ca1a8403096efb7da1512b0ae008b16f2dae553deed435163b137447b90fa8b0",
+        "Command": "bash",
+        "Created": 1682497573,
+        "Ports": [],
+        "Labels": {},
+        "State": "exited",
+        "Status": "Exited (130) 5 days ago",
+        "HostConfig": {
+            "NetworkMode": "default"
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "6ede375a4430a287439c1b58e85eea9ad06ea3a4d0eee8473469396a725d59bf",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        },
+        "Mounts": []
+    },
+    {
+        "Id": "f95ca698ef74032bc0566433644397e5710b035f77e40f9f822c7316a16f6ee6",
+        "Names": [
+            "/sweet_cartwright"
+        ],
+        "Image": "debian",
+        "ImageID": "sha256:ca1a8403096efb7da1512b0ae008b16f2dae553deed435163b137447b90fa8b0",
+        "Command": "bash",
+        "Created": 1682497074,
+        "Ports": [],
+        "Labels": {},
+        "State": "exited",
+        "Status": "Exited (0) 5 days ago",
+        "HostConfig": {
+            "NetworkMode": "default"
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "6ede375a4430a287439c1b58e85eea9ad06ea3a4d0eee8473469396a725d59bf",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/home/elias/Desktop/camelwhale/camelwhale/lib",
+                "Destination": "/home",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ]
+    },
+    {
+        "Id": "50f0d4979ef021b0fc53cf71a0e04e427f2403fe77d44867cf3bcea0ba7464f3",
+        "Names": [
+            "/practical_almeida"
+        ],
+        "Image": "debian",
+        "ImageID": "sha256:ca1a8403096efb7da1512b0ae008b16f2dae553deed435163b137447b90fa8b0",
+        "Command": "bash",
+        "Created": 1682497057,
+        "Ports": [],
+        "Labels": {},
+        "State": "exited",
+        "Status": "Exited (130) 5 days ago",
+        "HostConfig": {
+            "NetworkMode": "default"
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "6ede375a4430a287439c1b58e85eea9ad06ea3a4d0eee8473469396a725d59bf",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        },
+        "Mounts": []
+    },
+    {
+        "Id": "d3eebb9f1b7f0a71ee5fa399e716597e8734b5b731c76f6aa0c52578baae2775",
+        "Names": [
+            "/inspiring_dijkstra"
+        ],
+        "Image": "debian",
+        "ImageID": "sha256:ca1a8403096efb7da1512b0ae008b16f2dae553deed435163b137447b90fa8b0",
+        "Command": "bash",
+        "Created": 1682496884,
+        "Ports": [],
+        "Labels": {},
+        "State": "exited",
+        "Status": "Exited (130) 5 days ago",
+        "HostConfig": {
+            "NetworkMode": "default"
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "6ede375a4430a287439c1b58e85eea9ad06ea3a4d0eee8473469396a725d59bf",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/home/elias/Desktop/camelwhale/camelwhale/lib",
+                "Destination": "/home",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ]
+    },
+    {
+        "Id": "49e0c09243a4f2394d801e696de38be7a71de2eeb1611bb0c1d51403832350cc",
+        "Names": [
+            "/nervous_chaum"
+        ],
+        "Image": "debian",
+        "ImageID": "sha256:ca1a8403096efb7da1512b0ae008b16f2dae553deed435163b137447b90fa8b0",
+        "Command": "bash",
+        "Created": 1682496836,
+        "Ports": [],
+        "Labels": {},
+        "State": "exited",
+        "Status": "Exited (130) 5 days ago",
+        "HostConfig": {
+            "NetworkMode": "default"
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "6ede375a4430a287439c1b58e85eea9ad06ea3a4d0eee8473469396a725d59bf",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/home/elias/Desktop/camelwhale/camelwhale/lib",
+                "Destination": "/home",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ]
+    },
+    {
+        "Id": "3e545b5c740b0c2f3172f36548821241d6c32523ac64fffbbc19cb4672feed82",
+        "Names": [
+            "/determined_ritchie"
+        ],
+        "Image": "debian",
+        "ImageID": "sha256:ca1a8403096efb7da1512b0ae008b16f2dae553deed435163b137447b90fa8b0",
+        "Command": "bash",
+        "Created": 1682496648,
+        "Ports": [],
+        "Labels": {},
+        "State": "exited",
+        "Status": "Exited (0) 5 days ago",
+        "HostConfig": {
+            "NetworkMode": "default"
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "6ede375a4430a287439c1b58e85eea9ad06ea3a4d0eee8473469396a725d59bf",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        },
+        "Mounts": []
+    },
+    {
+        "Id": "b082865c3b192e4e8605f1f2c25924adfc070aeb3df46c4fb87845dfc645404f",
+        "Names": [
+            "/frosty_margulis"
+        ],
+        "Image": "debian",
+        "ImageID": "sha256:ca1a8403096efb7da1512b0ae008b16f2dae553deed435163b137447b90fa8b0",
+        "Command": "bash",
+        "Created": 1682496591,
+        "Ports": [],
+        "Labels": {},
+        "State": "exited",
+        "Status": "Exited (130) 5 days ago",
+        "HostConfig": {
+            "NetworkMode": "default"
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "6ede375a4430a287439c1b58e85eea9ad06ea3a4d0eee8473469396a725d59bf",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        },
+        "Mounts": []
+    },
+    {
+        "Id": "e2520c1a67066ee82db0205526657da71d2f8b978bb6f4d178a5e164845ca18b",
+        "Names": [
+            "/infallible_mclaren"
+        ],
+        "Image": "debian",
+        "ImageID": "sha256:ca1a8403096efb7da1512b0ae008b16f2dae553deed435163b137447b90fa8b0",
+        "Command": "bash",
+        "Created": 1682496549,
+        "Ports": [],
+        "Labels": {},
+        "State": "exited",
+        "Status": "Exited (130) 5 days ago",
+        "HostConfig": {
+            "NetworkMode": "default"
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "6ede375a4430a287439c1b58e85eea9ad06ea3a4d0eee8473469396a725d59bf",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        },
+        "Mounts": []
+    }
+]
