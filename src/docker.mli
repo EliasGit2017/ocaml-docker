@@ -89,6 +89,8 @@ module Container : sig
       image: string; (** Name of the image used to create the container. *)
       command: string; (** Command passed to the container. *)
       created: float;  (** Unix time of creation. *)
+      labels: string;
+      state: string;
       status: string;  (** Human readable status. *)
       ports: port list;
       size_rw: int option;
