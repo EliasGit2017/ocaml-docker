@@ -95,8 +95,9 @@ let read_headers fn_name buf fd =
       (* Let the client functions deal with 4xx to have more precise
          messages. *)
       print_endline @@ "read headers code : \n" ^ string_of_int code;
-      print_endline @@ "read headers list string : \n" ^ (stringlist_tostring " , " tl);
-      code, tl
+      print_endline @@ "read headers list string : \n"
+      ^ stringlist_tostring " , " tl;
+      (code, tl)
 
 (* [read_all buf fd] add to [buf] the content of [fd] until EOI is reached. *)
 let read_all buf fd =
@@ -105,11 +106,15 @@ let read_all buf fd =
   let continue = ref true in
   while !continue do
     let r = Unix.read fd b 0 4096 in
-    if r > 0 then Buffer.add_substring buf (Bytes.to_string b) 5 (r-11)
+    if r > 0 then Buffer.add_substring buf (Bytes.to_string b) 0 r
     else continue := false
   done;
-  print_endline @@ "Read all is : \n" ^ (Buffer.sub buf 6 ((Buffer.length buf) - 8));
-  Buffer.sub buf 6 ((Buffer.length buf) - 8)
+  print_endline @@ "Read all is : \n" ^ Buffer.sub buf 0 (Buffer.length buf);
+  let tmp = Buffer.contents buf in
+  print_endline (string_of_int (String.length tmp));
+  print_endline (string_of_int (String.index tmp '['));
+  print_endline (string_of_int (String.rindex tmp ']'));
+  Buffer.sub buf 6 (Buffer.length buf - 11)
 
 let read_response fn_name fd =
   print_endline "read response inside";
@@ -434,6 +439,64 @@ module Container = struct
     | `Assoc port -> port_of_json_assoc port
     | _ -> raise (Error ("Docker.Container.list", "Incorrect port"))
 
+  type label = {
+    config_hash : string;
+    cont_number : string;
+    oneoff : string;
+    project : string;
+    config_files : string;
+    working_dir : string;
+    service : string;
+    version : string;
+  }
+
+  let empty_label =
+    {
+      config_hash = "";
+      cont_number = "";
+      oneoff = "";
+      project = "";
+      config_files = "";
+      working_dir = "";
+      service = "";
+      version = "";
+    }
+
+  let label_of_json_assoc (c : Yojson.Safe.t) =
+    match c with
+    | `Assoc l ->
+        let c_h = ref ""
+        and c_n = ref ""
+        and oo = ref ""
+        and proj = ref ""
+        and c_f = ref ""
+        and w_d = ref ""
+        and s = ref ""
+        and v = ref "" in
+        let update = function
+          | "com.docker.compose.config-hash", `String e -> c_h := e
+          | "com.docker.compose.container-number", `String e -> c_n := e
+          | "com.docker.compose.oneoff", `String e -> oo := e
+          | "com.docker.compose.project", `String e -> proj := e
+          | "com.docker.compose.project.config_files", `String e -> c_f := e
+          | "com.docker.compose.project.working_dir", `String e -> w_d := e
+          | "com.docker.compose.service", `String e -> s := e
+          | "com.docker.compose.version", `String e -> v := e
+          | lab, value -> ()
+        in
+        update l;
+        {
+          config_hash = !c_h;
+          cont_number = !c_n;
+          oneoff = !oo;
+          project = !proj;
+          config_files = !c_f;
+          working_dir = !w_d;
+          service = !s;
+          version = !v;
+        }
+    | _ -> empty_label
+
   type t = {
     id : id;
     names : string list;
@@ -451,8 +514,14 @@ module Container = struct
   let container_of_json (c : Json.t) =
     match c with
     | `Assoc l ->
-        let id = ref "" and names = ref [] and image = ref "" and labels = ref "" in
-        let command = ref "" and created = ref 0. and status = ref "" and state = ref "" in
+        let id = ref ""
+        and names = ref []
+        and image = ref ""
+        and labels = ref empty_label in
+        let command = ref ""
+        and created = ref 0.
+        and status = ref ""
+        and state = ref "" in
         let ports = ref [] and size_rw = ref (-1) and size_root_fs = ref (-1) in
         let update = function
           | "Id", `String s -> id := s
@@ -460,8 +529,9 @@ module Container = struct
               names := List.map (string_of_json "Docker.Container.list") l
           | "Image", `String s -> image := s
           | "Command", `String s -> command := s
-          | "Created", `Int i -> created := float i (* same as Unix.time *)
-          | "Labels", `String s -> labels := s
+          (* same as Unix.time *)
+          | "Created", `Int i -> created := float i
+          | "Labels", `label s -> labels := label_of_json_assoc s (* labels extraction *)
           | "State", `String s -> state := s
           | "Status", `String s -> status := s
           | "Ports", `List p -> ports := List.map port_of_json p
@@ -553,7 +623,6 @@ module Container = struct
       | _ :: _ -> ("filters", Json.to_string (`Assoc filters)) :: q
       | [] -> q
     in
-    print_endline "list method called";
     let status, _, body =
       response_of_get "Docker.Container.list" addr "/containers/json" q
     in
