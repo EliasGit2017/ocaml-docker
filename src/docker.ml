@@ -50,13 +50,13 @@ let read_headers fn_name buf fd =
     if r > 0 then
       (* Split on \r\n *)
       let i = index_CRLF b ~pos:0 ~len:r in
-      if i < 0 then Buffer.add_subbytes buf (Bytes.to_string b) 0 r
+      if i < 0 then Buffer.add_subbytes buf b (* (Bytes.to_string b) *) 0 r
       else if i = 0 && Buffer.length buf = 0 then (
         (* End of headers (all previously captured). *)
-        Buffer.add_subbytes buf (Bytes.to_string b) 0 r;
+        Buffer.add_subbytes buf b (* (Bytes.to_string b) *) 0 r;
         continue := false)
       else (
-        Buffer.add_subbytes buf (Bytes.to_string b) 0 i;
+        Buffer.add_subbytes buf b (* (Bytes.to_string b) *) 0 i;
         headers := Buffer.contents buf :: !headers;
         Buffer.clear buf;
         (* Capture all possible additional headers in [b]. *)
@@ -71,10 +71,10 @@ let read_headers fn_name buf fd =
           pos := !i + 2;
           len := !len - h_len - 2
         done;
-        if !i < 0 then Buffer.add_subbytes buf (Bytes.to_string b) !pos !len
+        if !i < 0 then Buffer.add_subbytes buf b (* (Bytes.to_string b) *) !pos !len
         else (
           (* !i = !pos, i.e., empty line *)
-          Buffer.add_subbytes buf (Bytes.to_string b) (!pos + 2) (!len - 2);
+          Buffer.add_subbytes buf b (* (Bytes.to_string b) *) (!pos + 2) (!len - 2);
           continue := false))
     else continue := false
   done;
@@ -141,10 +141,7 @@ let deal_with_status_500 fn_name status fd =
 
 let[@inline] send_buffer fn_name addr buf =
   let fd = connect fn_name addr in
-  ignore
-    (Unix.write fd
-       (String.to_bytes (Buffer.to_bytes buf))
-       0 (Buffer.length buf));
+  ignore(Unix.write fd (Buffer.to_bytes buf) 0 (Buffer.length buf));
   fd
 
 let get fn_name addr url query =
@@ -210,10 +207,11 @@ let delete fn_name addr url query =
   Buffer.add_encoded_query buf query;
   Buffer.add_string buf Docker_config.http11_header;
   Buffer.add_string buf "\r\n";
-  ignore
+  ignore(Unix.write fd (Buffer.to_bytes buf) 0 (Buffer.length buf));
+  (* ignore
     (Unix.write fd
        (String.to_bytes @@ Buffer.to_bytes buf)
-       0 (Buffer.length buf));
+       0 (Buffer.length buf)); *)
   fd
 
 let response_of_delete fn_name addr url query =
@@ -439,7 +437,7 @@ module Container = struct
     | `Assoc port -> port_of_json_assoc port
     | _ -> raise (Error ("Docker.Container.list", "Incorrect port"))
 
-  type label = {
+  (* type label = {
     config_hash : string;
     cont_number : string;
     oneoff : string;
@@ -463,6 +461,7 @@ module Container = struct
     }
 
   let label_of_json_assoc (c : Yojson.Safe.t) =
+    print_endline (Json.prettify (Json.to_string c));
     match c with
     | `Assoc l ->
         let c_h = ref ""
@@ -482,9 +481,10 @@ module Container = struct
           | "com.docker.compose.project.working_dir", `String e -> w_d := e
           | "com.docker.compose.service", `String e -> s := e
           | "com.docker.compose.version", `String e -> v := e
-          | lab, value -> ()
+          | _ -> ()
+          (* | lab, value -> () *)
         in
-        update l;
+        (* update l; *)
         {
           config_hash = !c_h;
           cont_number = !c_n;
@@ -495,7 +495,7 @@ module Container = struct
           service = !s;
           version = !v;
         }
-    | _ -> empty_label
+    | _ -> empty_label *)
 
   type t = {
     id : id;
@@ -503,7 +503,7 @@ module Container = struct
     image : string;
     command : string;
     created : float;
-    labels : string;
+    (* labels : string; *)
     state : string;
     status : string;
     ports : port list;
@@ -516,8 +516,8 @@ module Container = struct
     | `Assoc l ->
         let id = ref ""
         and names = ref []
-        and image = ref ""
-        and labels = ref empty_label in
+        and image = ref "" in
+        (* and labels = ref "" in *)
         let command = ref ""
         and created = ref 0.
         and status = ref ""
@@ -531,7 +531,7 @@ module Container = struct
           | "Command", `String s -> command := s
           (* same as Unix.time *)
           | "Created", `Int i -> created := float i
-          | "Labels", `label s -> labels := label_of_json_assoc s (* labels extraction *)
+          (* | "Labels", `Assoc s -> print_endline (Json.prettify (Json.to_string s)); *)
           | "State", `String s -> state := s
           | "Status", `String s -> status := s
           | "Ports", `List p -> ports := List.map port_of_json p
@@ -546,7 +546,7 @@ module Container = struct
           image = !image;
           command = !command;
           created = !created;
-          labels = !labels;
+          (* labels = !labels; *)
           state = !state;
           status = !status;
           ports = !ports;
